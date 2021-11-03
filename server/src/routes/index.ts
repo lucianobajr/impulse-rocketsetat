@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "../controllers/AuthenticateUserController";
 import { CreateMessageController } from "../controllers/CreateMessageController";
+import { GetLast3MessagesControllers } from "../controllers/GetLast3MessagesControllers";
+import { ProfileUserController } from "../controllers/ProfileUserController";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const routes = Router();
@@ -27,5 +29,8 @@ routes.post(
   ensureAuthenticated,
   new CreateMessageController().handle
 );
+
+routes.get("/messages/last3", new GetLast3MessagesControllers().handle);
+routes.get("/profile", ensureAuthenticated, new ProfileUserController().handle);
 
 export default routes;
