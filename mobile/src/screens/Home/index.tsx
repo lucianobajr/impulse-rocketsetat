@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, Text, View } from "react-native";
 import Header from "../../components/Header";
+import { MessageProps } from "../../components/Message";
+import MessageList from "../../components/MessageList";
+import SendMessageForm from "../../components/SendMessageForm";
+import SignInBox from "../../components/SignInBox";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
 
 import { styles } from "./styles";
 
 const Home: React.FC = () => {
+  const { user } = useAuth();
   return (
-    <View style={styles.container}>
-      <Header />
-    </View>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+    >
+      <View style={styles.container}>
+        <Header />
+        <MessageList />
+
+        {user ? <SendMessageForm /> : <SignInBox />}
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 

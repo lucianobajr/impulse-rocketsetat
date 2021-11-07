@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONTS } from "../../theme";
+import { COLORS } from "../../theme";
 
 export const styles = StyleSheet.create({
   avatar: {
